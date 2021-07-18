@@ -1,17 +1,53 @@
 <template>
-    <div>
-      Header
+  <div class="container">
+    <div class="row">
+
+      <div class="col-6 container-img">
+        <img src="../assets/netflix-logo-vector.svg" alt="">
+      </div>
+
+      <div class="col-6 container-search">
+        <div class="font-cont">
+          <input type="text" placeholder="Search" v-model="searchFilm" />
+          <button @click="$emit('search', searchFilm)"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+
     </div>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'Header',
-  
+    data() {
+      return {
+        searchFilm: ''
+      }
+    }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped lang="scss">
+.container{
+  .row{
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+
+    .container-img{
+      width: 15%;
+      img{
+        width: 80%;
+      }
+    }
+    .container-search{
+      display: flex;
+      flex-direction: row-reverse;
+      
+    }
+  }
+}
 
 </style>
