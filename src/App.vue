@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <!-- ascoltiamo la chiamata che arriva dal header -->
+    <!-- attviamo la funzione allo scaturirsi di un evento  -->
     <Header @search="searchMovie" />
 
-    <!-- qui mandiamo al main sia l'input del utente sia l'array filtrato  -->
+    <!-- qui mandiamo al main entrambi gli array filtrati  -->
     <Main :arraySeries ="filterArraySeries" :arrayFilms ="filterArrayFilms"/>
 
   </div>
@@ -30,7 +30,7 @@ export default {
      
     }
   },
-  created() {
+  created() { //sicuramente ce un modo migliore e meno ripetitivo! cercarlo!
     axios.get('https://api.themoviedb.org/3/movie/popular?api_key=f394a1fa44ab00bde7bf76854bdac775').then((result) => {
       this.popularFilms = result.data.results;
       this.filterArrayFilms = result.data.results;
@@ -44,8 +44,10 @@ export default {
    searchMovie(searchFilm){
      if(searchFilm.length == 0){
       this.filterArrayFilms = this.popularFilms
+      this.filterArraySeries = this.popularSeries
       return ;
-      }
+      } 
+      //sicuramente ce un modo migliore e meno ripetitivo! cercarlo!
       axios.get(`https://api.themoviedb.org/3/search/movie?api_key=f394a1fa44ab00bde7bf76854bdac775&query=${searchFilm}`).then((result) =>{
       this.filterArrayFilms = result.data.results;
       });

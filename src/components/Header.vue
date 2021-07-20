@@ -45,6 +45,18 @@ export default {
     .container-search{
       display: flex;
       flex-direction: row-reverse;
+      .font-cont{
+        input{
+          border-radius: 40px;
+          outline: none;
+          padding-left: 10px;
+        }
+        button{
+          border-radius: 50px;
+          margin-left: 5px;
+          border: none;
+        }
+      }
       
     }
   }

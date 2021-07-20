@@ -2,10 +2,9 @@
   <div class="card-container col-2">
     <div class="hover-cont">
       <span v-if="hover" class="original_title">
-        <h5>Name: {{original_title}}</h5>
-        <h5>Languge: <Flag :lang="lang"/></h5>
-        <h5>Vote: {{vote_average}}</h5>
-        
+        <h2>{{title}}</h2>
+        <Flag :lang="lang"/>
+        <i v-for="i in 5" :key="i" class="fa-star" :class="n <= vote_average ? 'fas' : 'far' "></i>
       </span>
     </div>
     <img  
@@ -23,18 +22,17 @@ export default {
   components: {
       Flag,
   }, 
-  props: {
+  props: { //ascoltiamo i dati che invia il padre (main)
     poster_path: String,
     title: String,
-    original_title: String,
     lang: String,
     vote_average: Number
 
   },
   data() {
     return {
+      voteRounded: Math.round(this.vote_average / 2),
       hover: false,
-      Flag: ["it","en"]
     }
   },
   computed: { 
@@ -42,13 +40,7 @@ export default {
       return  'https://image.tmdb.org/t/p/w342' + this.poster_path
     }
   },
-  flagLang() { //controlliamo che lang sia incluso del nostro array 
-      if (this.Flag.includes(this.lang)) {
-        return require("../assets/" + this.lang + ".png"); // se e incluso aggiunge la bandiera al lang!
-      } else {
-        return this.lang;
-      }
-    },
+  
 }
 </script>
 

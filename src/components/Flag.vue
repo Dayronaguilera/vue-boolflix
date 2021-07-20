@@ -1,8 +1,6 @@
 <template>
   <div class="Flag">
-      <img v-if="lang == 'it'" src="../assets/it.png" alt="it-flag">
-      <img v-else-if="lang == 'en'" src="../assets/en.png" alt="it-flag">
-      <div v-else>{{lang}}</div>
+      <img  :src="flagDinamic" alt="flag">
   </div>
 </template>
 
@@ -11,7 +9,12 @@ export default {
   name: "Flag",
   props: {
       lang: String
-  }
+  },
+  computed: {
+        flagDinamic(){
+            return require ('../assets/' + this.lang + '.png');
+        }
+  },
 };
 </script>
 
