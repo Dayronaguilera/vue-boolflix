@@ -8,8 +8,8 @@
 
       <div class="col-6 container-search">
         <div class="font-cont">
-          <input type="text" placeholder="Search" v-model="searchFilm" />
-          <button @click="$emit('search', searchFilm)"><i class="fas fa-search"></i></button>
+          <input type="text" placeholder="Search" v-model="searchFilm" @keyup.enter="$emit('search', searchFilm)"/>
+          <button @click="$emit('search', searchFilm)" ><i class="fas fa-search"></i></button>
         </div>
       </div>
 
@@ -22,7 +22,7 @@ export default {
   name: 'Header',
     data() {
       return {
-        searchFilm: ''
+        searchFilm:''
       }
     }
 }

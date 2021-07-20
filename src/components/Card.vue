@@ -3,40 +3,52 @@
     <div class="hover-cont">
       <span v-if="hover" class="original_title">
         <h5>Name: {{original_title}}</h5>
-        <h5>Lenguage: {{original_language}}</h5>
+        <h5>Languge: <Flag :lang="lang"/></h5>
         <h5>Vote: {{vote_average}}</h5>
+        
       </span>
     </div>
     <img  
      @mouseover="hover = true"
      @mouseleave="hover = false"
     :src="newPathImg" :alt="`image of ${title}`">
-
-    <div @mouseover="hover = false" @mouseleave="hover = true" class="title">{{title}}</div>
   </div>
 </template>
 
 <script>
+import Flag from "./Flag.vue"
+
 export default {
-  name: 'Card', 
+  name: 'Card',
+  components: {
+      Flag,
+  }, 
   props: {
     poster_path: String,
     title: String,
     original_title: String,
-    original_language: String,
+    lang: String,
     vote_average: Number
 
   },
   data() {
     return {
       hover: false,
-    };
+      Flag: ["it","en"]
+    }
   },
   computed: { 
     newPathImg() { //aggiungiamo il pezzo macante a poster-path!
       return  'https://image.tmdb.org/t/p/w342' + this.poster_path
     }
   },
+  flagLang() { //controlliamo che lang sia incluso del nostro array 
+      if (this.Flag.includes(this.lang)) {
+        return require("../assets/" + this.lang + ".png"); // se e incluso aggiunge la bandiera al lang!
+      } else {
+        return this.lang;
+      }
+    },
 }
 </script>
 
@@ -50,11 +62,12 @@ export default {
         position: absolute;
         top: 15%;
         left: 10%;
-        padding: 10px;
-        
+        padding: 10px;  
       }
       img{
-        height: 65%;
+        width: 110%;
+        height: 100%;
+        padding-bottom: 5px;
         &:hover{
           opacity: 0.2;
         }

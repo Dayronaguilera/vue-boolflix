@@ -8,9 +8,15 @@
       :title='film.title'
       :vote_average='film.vote_average'
       :original_title='film.original_title'
-      :original_language='film.original_language'
+      :lang="film.original_language"
       :poster_path="film.poster_path"
-      :inputSearch="inputSearch"
+      />
+      <Card v-for="series in arraySeries" :key="series.id"
+      :title='series.title'
+      :vote_average='series.vote_average'
+      :original_title='series.original_title'
+      :lang="series.original_language"
+      :poster_path="series.poster_path"
       />
     </div>
   </div>
@@ -26,7 +32,7 @@ export default {
   },
   props: {
     arrayFilms: Array,
-    inputSearch: String
+    arraySeries: Array
   }
   
 }
