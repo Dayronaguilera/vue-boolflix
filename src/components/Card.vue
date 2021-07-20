@@ -2,9 +2,9 @@
   <div class="card-container col-2">
     <div class="hover-cont">
       <span v-if="hover" class="original_title">
-        <h2>{{title}}</h2>
+        <h2>{{title}}{{original_name}}</h2>
         <Flag :lang="lang"/>
-        <i v-for="i in 5" :key="i" class="fa-star" :class="n <= vote_average ? 'fas' : 'far' "></i>
+        <i v-for="i in 5" :key="i" class="fa-star" :class="i <= voteRounded ? 'fas' : 'far' "></i>
       </span>
     </div>
     <img  
@@ -19,6 +19,12 @@ import Flag from "./Flag.vue"
 
 export default {
   name: 'Card',
+    data() {
+      return {
+        voteRounded: Math.round(this.vote_average / 2),
+        hover: false,
+      }
+    },
   components: {
       Flag,
   }, 
@@ -26,14 +32,9 @@ export default {
     poster_path: String,
     title: String,
     lang: String,
-    vote_average: Number
+    vote_average: Number,
+    original_name: String
 
-  },
-  data() {
-    return {
-      voteRounded: Math.round(this.vote_average / 2),
-      hover: false,
-    }
   },
   computed: { 
     newPathImg() { //aggiungiamo il pezzo macante a poster-path!

@@ -12,7 +12,7 @@
       :poster_path="film.poster_path"
       />
       <Card v-for="series in arraySeries" :key="series.id"
-      :title='series.title'
+      :original_name='series.original_name'
       :vote_average='series.vote_average'
       :original_title='series.original_title'
       :lang="series.original_language"
